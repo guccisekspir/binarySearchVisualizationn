@@ -38,6 +38,7 @@ void main() {
     app.main();
     await widgetTester.pumpWidget(HomePage(
       key: ValueKey("HomePage"),
+      currentWillSearchList: currentWillSearchList,
     ));
     await widgetTester.pumpAndSettle(Duration(seconds: 2));
 
@@ -52,6 +53,7 @@ void main() {
     app.main();
     await widgetTester.pumpWidget(HomePage(
       key: ValueKey("HomePage"),
+      currentWillSearchList: currentWillSearchList,
     ));
     await widgetTester.pumpAndSettle(Duration(seconds: 2));
 
@@ -66,6 +68,7 @@ void main() {
     app.main();
     await widgetTester.pumpWidget(HomePage(
       key: ValueKey("HomePage"),
+      currentWillSearchList: currentWillSearchList,
     ));
     await widgetTester.pumpAndSettle(Duration(seconds: 2));
 
@@ -76,17 +79,18 @@ void main() {
     expect(find.textContaining("Final result founded : -1"), findsOneWidget);
   });
 
-  testWidgets("is 1 gives -1", (WidgetTester widgetTester) async {
+  testWidgets("is higher than last array member will give last array member", (WidgetTester widgetTester) async {
     app.main();
     await widgetTester.pumpWidget(HomePage(
       key: ValueKey("HomePage"),
+      currentWillSearchList: currentWillSearchList,
     ));
     await widgetTester.pumpAndSettle(Duration(seconds: 2));
 
-    await widgetTester.enterText(find.byKey(ValueKey(HomePageKeys.generalTextField)), "1");
+    await widgetTester.enterText(find.byKey(ValueKey(HomePageKeys.generalTextField)), "69");
     await widgetTester.tap(find.byKey(ValueKey(HomePageKeys.startSearchButtonKey)));
     await widgetTester.pumpAndSettle(Duration(seconds: 10));
 
-    expect(find.textContaining("Final result founded : -1"), findsOneWidget);
+    expect(find.textContaining("Final result founded : 68"), findsOneWidget);
   });
 }

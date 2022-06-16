@@ -170,6 +170,7 @@ class HomePageState extends State<HomePage> {
                           duration: const Duration(milliseconds: 300),
                           // we are looking in there are current index is between
                           // min-max . Main reason is define and visualize focused scope
+                          //
                           color: ((currentBinaryNumber.index >= currentMinimum &&
                                   currentBinaryNumber.index <= currentMaximum))
                               ? currentResult != null
@@ -236,6 +237,9 @@ class HomePageState extends State<HomePage> {
   List<String> steps = [];
 
   Future<int> binarySearch(List<int> integerList, int willSearchNumber) async {
+    debugPrint("geldi " + integerList.toString());
+
+    debugPrint("gelmiş " + widget.currentWillSearchList.toString());
     int? result;
     //if given integerList is empty return instantly -1
     if (integerList.isEmpty) {
