@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sampleflutter/blocs/counterBloc/bloc/counter_bloc.dart';
 import 'package:sampleflutter/helpers/sizeHelper.dart';
 import 'package:sampleflutter/helpers/themeHelper.dart';
 import 'package:sampleflutter/pages/homePage/homePage.dart';
@@ -32,11 +30,6 @@ class _LandPageState extends State<LandPage> {
 
   @override
   Widget build(BuildContext context) {
-    return isInit
-        ? BlocProvider(
-            create: (context) => CounterBloc(),
-            child: HomePage(),
-          )
-        : CircularProgressIndicator();
+    return isInit ? HomePage() : CircularProgressIndicator();
   }
 }

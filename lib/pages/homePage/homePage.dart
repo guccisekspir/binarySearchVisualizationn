@@ -2,8 +2,6 @@ import 'dart:developer';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sampleflutter/blocs/counterBloc/bloc/counter_bloc.dart';
 import 'package:sampleflutter/helpers/sizeHelper.dart';
 import 'package:sampleflutter/helpers/themeHelper.dart';
 import 'package:sampleflutter/models/binaryNumber.dart';
@@ -50,29 +48,26 @@ class HomePage extends StatefulWidget {
 
 @visibleForTesting
 class HomePageState extends State<HomePage> {
-  bool isClicked = false;
-  int counter = 0;
-  late CounterBloc counterBloc;
-
   ThemeHelper themeHelper = ThemeHelper();
   SizeHelper sizeHelper = SizeHelper();
+  FocusNode willSearchTextFieldFocusNode = FocusNode();
 
+  late TextEditingController willSearchTextEditingController;
   late List<int> currentwillSearchList;
-
   late List<BinaryNumber> currentWillSearchBinaryNumber;
 
   late int currentMiddle;
   late int currentMinimum;
   late int currentMaximum;
   int? currentResult;
+  List<String> steps = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     currentwillSearchList = widget.currentWillSearchList;
-    counterBloc = BlocProvider.of<CounterBloc>(context);
-    currentMiddle = (currentwillSearchList.length / 2).floor();
+    currentMiddle = currentwillSearchList[(currentwillSearchList.length / 2).floor()];
     currentMinimum = 0;
     currentMaximum = currentwillSearchList.length;
     currentWillSearchBinaryNumber = currentwillSearchList
@@ -82,16 +77,8 @@ class HomePageState extends State<HomePage> {
             isOnScoped: true,
             isMiddle: currentwillSearchList.indexOf(currentValue) == currentMiddle))
         .toList();
-
     willSearchTextEditingController = TextEditingController(text: "10");
-
-    //binarySearch(currentwillSearchList, 63);
-    // letsMakeSearching();
-    //  func1(a, 13);
   }
-
-  late TextEditingController willSearchTextEditingController;
-  FocusNode willSearchTextFieldFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -233,8 +220,6 @@ class HomePageState extends State<HomePage> {
       ),
     );
   }
-
-  List<String> steps = [];
 
   Future<int> binarySearch(List<int> integerList, int willSearchNumber) async {
     debugPrint("geldi " + integerList.toString());
