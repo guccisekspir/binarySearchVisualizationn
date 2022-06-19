@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:sampleflutter/helpers/sizeHelper.dart';
 import 'package:sampleflutter/helpers/themeHelper.dart';
 import 'package:sampleflutter/models/binaryNumber.dart';
+import 'package:sampleflutter/pages/homePage/widgets/coloredInfoContainer.dart';
 import 'package:sampleflutter/pages/homePage/widgets/customTextField.dart';
 import 'package:sampleflutter/pages/homePage/widgets/titleWidget.dart';
 
@@ -91,29 +92,15 @@ class HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 const TitleWidget(title: "Binary Search Flutter Sample"),
-                Row(
-                  children: [
-                    const Spacer(),
-                    Container(
-                      height: sizeHelper.height! * 0.025,
-                      width: sizeHelper.height! * 0.025,
-                      color: Colors.green,
-                    ),
-                    const Text(
-                      " : Middle Number",
-                      style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
-                    ),
-                    const Spacer(),
-                    Container(
-                      height: sizeHelper.height! * 0.025,
-                      width: sizeHelper.height! * 0.025,
-                      color: Colors.blue,
-                    ),
-                    const Text(
-                      " : Result Number",
-                      style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-                    ),
-                    const Spacer(),
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  direction: Axis.horizontal,
+                  runSpacing: 10,
+                  spacing: 15,
+                  children: const [
+                    ColoredInfoContainer(mainColor: Colors.green, title: " : Middle Number"),
+                    ColoredInfoContainer(mainColor: Colors.blue, title: " : Result Number"),
+                    ColoredInfoContainer(mainColor: Colors.amber, title: " : Focused Range")
                   ],
                 ),
                 const TitleWidget(title: "Will searched list : "),
