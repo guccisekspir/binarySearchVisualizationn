@@ -61,13 +61,17 @@ void main() {
       currentWillSearchList: currentWillSearchList,
     ));
     int maximumStepOfCurrentList = log(currentWillSearchList.length).floor();
+    // random number between 0 and length-1
+    int randomExcatNumberIndex = Random().nextInt(currentWillSearchList.length - 1);
+    int randomExactNumber = currentWillSearchList[randomExcatNumberIndex];
 
     await widgetTester.pumpAndSettle(const Duration(seconds: 2));
-    await widgetTester.enterText(find.byKey(const ValueKey(HomePageKeys.generalTextField)), "45");
+    await widgetTester.enterText(
+        find.byKey(const ValueKey(HomePageKeys.generalTextField)), randomExactNumber.toString());
     await widgetTester.tap(find.byKey(const ValueKey(HomePageKeys.startSearchButtonKey)));
     await widgetTester.pumpAndSettle(Duration(seconds: maximumStepOfCurrentList));
 
-    expect(find.textContaining("Final result founded : 45"), findsOneWidget);
+    expect(find.textContaining("Final result founded : " + randomExactNumber.toString()), findsOneWidget);
   });
 
   testWidgets("is lower than lowest variable gives -1", (WidgetTester widgetTester) async {
@@ -104,6 +108,6 @@ void main() {
     await widgetTester.tap(find.byKey(const ValueKey(HomePageKeys.startSearchButtonKey)));
     await widgetTester.pumpAndSettle(Duration(seconds: maximumStepOfCurrentList));
 
-    expect(find.textContaining("Final result founded : 68"), findsOneWidget);
+    expect(find.textContaining("Final result founded : " + currentWillSearchList.last.toString()), findsOneWidget);
   });
 }
