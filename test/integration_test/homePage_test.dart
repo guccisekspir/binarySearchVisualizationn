@@ -43,10 +43,9 @@ void main() {
       key: const ValueKey("HomePage"),
       currentWillSearchList: currentWillSearchList,
     ));
-    //It runs in log time O(log n). So if we have an array of 1024 elements, the maximum number of steps is log21024 = 10 because 210 = 1024
+    //It runs in log time O(log n). So if we have an array of 1024 elements, the maximum number of steps is log2^1024 = 10 because 2^10 = 1024
     int maximumStepOfCurrentList = log(currentWillSearchList.length).floor();
     await widgetTester.pumpAndSettle(const Duration(seconds: 2));
-
     await widgetTester.enterText(find.byKey(const ValueKey(HomePageKeys.generalTextField)), "13");
     await widgetTester.tap(find.byKey(const ValueKey(HomePageKeys.startSearchButtonKey)));
     await widgetTester.pumpAndSettle(Duration(seconds: maximumStepOfCurrentList));
@@ -65,6 +64,7 @@ void main() {
     int randomExcatNumberIndex = Random().nextInt(currentWillSearchList.length - 1);
     int randomExactNumber = currentWillSearchList[randomExcatNumberIndex];
 
+    debugPrint("randomExactNumber: $randomExactNumber");
     await widgetTester.pumpAndSettle(const Duration(seconds: 2));
     await widgetTester.enterText(
         find.byKey(const ValueKey(HomePageKeys.generalTextField)), randomExactNumber.toString());

@@ -1,17 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sampleflutter/pages/errorScreen/errorScreen.dart';
 import 'package:sampleflutter/pages/landPage.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
+  final GoRouter _router = GoRouter(
+    errorBuilder: (context, state) => ErrorScreen(
+      error: state.error,
+    ),
+    initialLocation: "/",
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const LandPage(),
+      ),
+    ],
+  );
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routeInformationProvider: _router.routeInformationProvider,
+      routeInformationParser: _router.routeInformationParser,
+      routerDelegate: _router.routerDelegate,
       title: 'Binary Search',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -26,7 +44,6 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const LandPage(),
     );
   }
 }

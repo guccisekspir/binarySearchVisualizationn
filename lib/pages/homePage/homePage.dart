@@ -85,10 +85,10 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: SizedBox(
-            height: sizeHelper.height,
-            width: sizeHelper.width,
+        child: SizedBox(
+          height: sizeHelper.height!,
+          width: sizeHelper.width,
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 const TitleWidget(title: "Binary Search Flutter Sample"),
@@ -180,26 +180,24 @@ class HomePageState extends State<HomePage> {
                   ),
                 ),
                 const TitleWidget(title: "Steps"),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: steps.length,
-                      itemBuilder: ((context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(1.0),
-                          child: SizedBox(
-                            height: sizeHelper.height! * 0.05,
-                            width: sizeHelper.width,
-                            child: AutoSizeText(
-                              steps[index],
-                              style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        );
-                      })),
-                ),
-                const Spacer(),
+                ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: steps.length,
+                    itemBuilder: ((context, index) {
+                      return steps[index].isNotEmpty
+                          ? Padding(
+                              padding: const EdgeInsets.all(1.0),
+                              child: SizedBox(
+                                height: sizeHelper.height! * 0.05,
+                                width: sizeHelper.width,
+                                child: AutoSizeText(
+                                  steps[index],
+                                  style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            )
+                          : const SizedBox();
+                    })),
               ],
             ),
           ),
